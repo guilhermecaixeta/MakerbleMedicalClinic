@@ -1,0 +1,52 @@
+version: "3.5"
+
+services:
+  # Primary application service
+  makerble_medical_clinic:
+    user: "vscode:vscode"
+    build:
+      context: ..
+      dockerfile: .devcontainer/Dockerfile  
+      args:
+        - PORT=${APP_MAIN_PORT}
+        - RUBY_VERSION=${RUBY_VERSION}
+        - NODE_JS_VERSION=${NODE_JS_VERSION}
+        - BUNDLE_VERSION=${BUNDLE_VERSION} 
+    ports:
+      - ${APP_MAIN_PORT}:${APP_MAIN_PORT}
+    volumes:
+      - ..:/app:cached
+      - $HOME/.ssh/:/home/vscode/.ssh/
+    command: sleep infinity
+    networks:
+      - makerble_medical_clinic_network_shared
+
+  # PostgreSQL database service
+  postgres:
+    image: postgres:12-alpine
+    env_file:
+      - path: ./postgres_devcontainer.env
+        required: true    
+    volumes:
+      - makerble_medical_clinic_postgres_data:/var/lib/postgresql/data
+    ports:
+      - ${POSTGRES_PORT}:5432
+    networks:
+      - makerble_medical_clinic_network_shared
+
+  # Mailcatcher service
+  mailcatcher:
+    image: schickling/mailcatcher
+    ports:
+      - ${MAIL_CATCHER_PORT}:1080
+    networks:
+      - makerble_medical_clinic_network_shared
+
+volumes:
+  makerble_medical_clinic_postgres_data:
+    driver: local
+
+networks:
+  makerble_medical_clinic_network_shared:
+    name: makerble_medical_clinic_network_shared
+    external: true

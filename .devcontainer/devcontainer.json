@@ -1,0 +1,35 @@
+{
+  "name": "MakerbleMedicalClinic",
+  "dockerComposeFile": "docker-compose.yml",
+  "service": "makerble_medical_clinic",
+  "workspaceFolder": "/app",
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "Shopify.ruby-extensions-pack",
+        "sorbet.sorbet-vscode-extension",
+        "hoovercj.ruby-linter",
+        "castwide.solargraph",
+        "bung87.vscode-gemfile",
+        "hridoy.rails-snippets",
+        "aliariff.vscode-erb-beautify",
+        "ldrner.rspec-snippets-vscode",
+        "Fooo.ruby-spec-runner",
+        "KoichiSasada.vscode-rdbg",
+        "jnbt.vscode-rufo",
+        "manuelpuyol.erb-linter",
+        "esbenp.prettier-vscode",
+        "mhutchie.git-graph",
+        "BIGModelingTools.erdiagram",
+        "GitHub.vscode-pull-request-github",
+        "GitHub.remotehub",
+        "shaharkazaz.git-merger",
+        "donjayamanne.githistory",
+        "codezombiech.gitignore"
+      ]
+    }
+  },
+  "remoteUser": "root", 
+  "forwardPorts": [3000, 5432],
+  "postCreateCommand": "chmod +x /app/.devcontainer/post-create.sh && /app/.devcontainer/post-create.sh"
+}
