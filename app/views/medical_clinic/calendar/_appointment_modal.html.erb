@@ -1,0 +1,39 @@
+<div class="modal fade" id="appointment-modal" tabindex="-1" aria-labelledby="appointment-modal-label" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="appointment-modal-label">
+          <%= Appointment.model_name.human %>
+        </h5>
+        <button type="button" class="btn-close" data-coreui-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="row g-3">
+          <div class="col-md-6">
+            <label for="start-date-time" class="form-label">Start date time</label>
+            <input type="text" class="form-control" id="start-date-time" value="Mark" readonly>
+          </div>
+          <div class="col-md-6">
+            <label for="end-date-time" class="form-label">End date time</label>
+            <input type="text" class="form-control" id="end-date-time" value="Mark" readonly>
+          </div>
+          <div class="col">
+            <label for="doctor-name" class="form-label">Doctor</label>
+            <input type="text" class="form-control" id="doctor-name" value="Mark" readonly>
+          </div>
+          <div class="col">
+            <label for="specialty-name" class="form-label">Specialty</label>
+            <input type="text" class="form-control" id="specialty-name" value="Mark" readonly>
+          </div>
+          <div class="col">
+            <label for="patient-name" class="form-label">Patient</label>
+            <input type="text" class="form-control" id="patient-name" value="Mark" readonly>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-coreui-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>

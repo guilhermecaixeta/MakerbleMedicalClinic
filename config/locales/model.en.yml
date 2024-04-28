@@ -1,0 +1,9 @@
+en:
+  activerecord:
+    models:
+      doctor:
+        one: Doctor
+        other: Doctors
+      attendant:
+        one: Attendant
+        other: Attendants

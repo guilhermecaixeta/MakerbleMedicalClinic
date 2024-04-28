@@ -1,0 +1,37 @@
+<%= form_with(model: [:medical_clinic, @appointment], remote: true, class: "row g-3 needs-validation") do |f| %>
+  <div class="row g-3 mb-3">
+    <div class="col-md-4">
+      <%= f.label :start_date_time, class: "form-label" %>
+      <%= f.datetime_local_field :start_date_time, class: "form-control" %>
+      <div class="valid-feedback">
+        Looks good!
+      </div>
+    </div>
+    <div class="col-md-4">
+      <%= f.label :end_date_time, class: "form-label" %>
+      <%= f.datetime_local_field :end_date_time, class: "form-control" %>
+      <div class="valid-feedback">
+        Looks good!
+      </div>
+    </div>
+  </div>
+  <div class="row mb-3">
+    <div class="col-md-4">
+      <%= f.label :doctor, class: "form-label" %>
+      <%= f.collection_select :doctor_id, doctors_selection, :id, :name, {}, class: "form-select" %>
+    </div>
+    <div class="col-md-4">
+      <%= f.label :specialty, class: "form-label" %>
+      <%= f.collection_select :specialty_id, specialties_selection, :id, :name, {}, class: "form-select" %>
+    </div>
+  </div>
+  <div class="row mb-3">
+    <div class="col-md-4">
+      <%= f.label :patient, class: "form-label" %>
+      <%= f.collection_select :patient, specialties_selection, :id, :name, {}, class: "form-select" %>
+    </div>
+  </div>
+  <div class="col-12">
+    <%= f.submit t(action_name == "new" || action_name == "create" ? "helpers.submit.create" : "helpers.submit.update", model: ""), class: "btn btn-primary" %>
+  </div>
+<% end %>

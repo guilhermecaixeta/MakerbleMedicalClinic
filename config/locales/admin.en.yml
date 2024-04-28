@@ -1,3 +1,7 @@
 en:
   admin:
-    
+    title: "Makerble Medical"
+    dashboards: Dashboards
+    all: All
+    new: New
+    calendar: Calendar 

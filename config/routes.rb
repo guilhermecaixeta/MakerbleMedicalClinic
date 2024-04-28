@@ -1,6 +1,14 @@
 Rails.application.routes.draw do
+  namespace :medical_clinic do
+    resources :patients
+    resources :appointments
+    resources :calendar, only: [:index]
+  end
+
   namespace :backoffice do
-    get "home/index"
+    resources :attendants, except: [:show]
+    resources :doctors, except: [:show]
+    resource :home, only: [:index]
   end
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 

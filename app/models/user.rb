@@ -9,5 +9,5 @@ class User < ApplicationRecord
   has_and_belongs_to_many :roles
 
   validates :name, presence: true, length: { minimum: 3, maximum: 255 }
-  validates :birthday, presence: true
+  validates :birthday, presence: true, comparison: { less_than_or_equal_to: Time.now }
 end

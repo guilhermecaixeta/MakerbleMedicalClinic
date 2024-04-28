@@ -14,6 +14,7 @@ fi
 # If there's a Gemfile, then run `bundle install`
 if [ -f Gemfile ]; then
     if [ -f Gemfile ]; then
+    
     echo "Installing gems" 
     gem install rails htmlbeautifier solargraph \
         sorbet rufo tapioca foreman \
@@ -21,11 +22,13 @@ if [ -f Gemfile ]; then
     
     echo "running bundle"
     bundle install
+    
+    chmod u+x bin/rails
 
     echo "initializing sorbet"
     bundle exec srb init
 
-    # echo "initializing tapioca"
-    # bundle exec tapioca init
+    echo "initializing tapioca"
+    bundle exec tapioca init
 fi
 fi

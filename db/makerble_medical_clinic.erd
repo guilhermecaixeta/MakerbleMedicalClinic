@@ -12,20 +12,23 @@ entity User {
     birthday: Date
 }
 
-entity Support extends User { 
+entity Management extends User {
     id key
 }
 
-entity Doctor extends User { 
+entity Doctor extends User {
     id key
 }
 
-entity Attendant extends User { 
+entity Attendant extends User {
     id key
 }
 
-entity Patient extends User { 
+entity Patient {
     id key
+    name: VARCHAR(255)
+    email: VARCHAR(255)
+    birthday: Date
 }
 
 entity Role {
@@ -42,9 +45,12 @@ entity Permission {
 entity Appointment {
     id key
     date_time: DATETIME
-    id_doctor: foreign_key Doctor
-    id_patient: foreign_key Patient
-    id_specialty: foreign_key Specialty
+    id_doctor: foreign_key
+    Doctor
+    id_patient: foreign_key
+    Patient
+    id_specialty: foreign_key
+    Specialty
 }
 
 entity Specialty {

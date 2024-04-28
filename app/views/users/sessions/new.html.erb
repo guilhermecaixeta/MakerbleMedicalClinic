@@ -14,7 +14,7 @@
               <div class="input-group mb-3">
                 <span class="input-group-text">
                   <svg class="icon">
-                    <use xlink:href="../assets/coreui/icons-2/sprites/free.svg#cil-user"></use>
+                    <use xlink:href="<%= asset_path "/app/assets/coreui/icons-2/sprites/free.svg" %>#cil-user"></use>
                   </svg>
                 </span>
                 <%= f.email_field :email, class: "form-control", placeholder: "Email", type: "email", autofocus: "autofocus" %>
@@ -22,7 +22,7 @@
               <div class="input-group mb-4">
                 <span class="input-group-text">
                   <svg class="icon">
-                    <use xlink:href="../assets/coreui/icons-2/sprites/free.svg#cil-lock-locked"></use>
+                    <use xlink:href="<%= asset_path "/app/assets/coreui/icons-2/sprites/free.svg" %>#cil-lock-locked"></use>
                   </svg>
                 </span>
                 <%= f.password_field :password, class: "form-control", placeholder: "Password", type: "password", autofocus: "autofocus" %>
