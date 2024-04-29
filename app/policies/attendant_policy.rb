@@ -3,7 +3,7 @@
 
 class AttendantPolicy < UserPolicy
   def permitted_attributes
-    [:name, :birthday, :email, :password, :password_confirmation, role_ids: []]
+    [:name, :birthday, :email, :password, :password_confirmation, :avatar, role_ids: []]
   end
 
   class Scope < ApplicationPolicy::Scope

@@ -1,2 +1,0 @@
-module MedicalClinic::PatientHelper
-end

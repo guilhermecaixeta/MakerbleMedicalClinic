@@ -59,7 +59,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_04_25_233726) do
     t.string "name", limit: 255, null: false
     t.string "email", limit: 255, null: false
     t.datetime "birthday", null: false
-    t.string "phone", limit: 12, null: false
+    t.string "phone", limit: 25, null: false
     t.string "address", limit: 255, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

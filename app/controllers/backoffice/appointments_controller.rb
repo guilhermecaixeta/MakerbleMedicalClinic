@@ -1,4 +1,4 @@
-class MedicalClinic::AppointmentsController < BackofficeController
+class Backoffice::AppointmentsController < BackofficeController
   def index
     super
   end

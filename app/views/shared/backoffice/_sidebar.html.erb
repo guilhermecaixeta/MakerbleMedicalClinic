@@ -28,13 +28,13 @@
         <% end %>
       </li>
     <% end %>
-    <% can_read_and_write_patient = policy_for(current_user, MedicalClinic::PatientsController.controller_path).can_read_and_write? %>
-    <% can_read_patient = policy_for(current_user, MedicalClinic::PatientsController.controller_path).can_read? %>
+    <% can_read_and_write_patient = policy_for(current_user, Backoffice::PatientsController.controller_path).can_read_and_write? %>
+    <% can_read_patient = policy_for(current_user, Backoffice::PatientsController.controller_path).can_read? %>
     <% if can_read_and_write_patient || can_read_patient %>
       <li class="nav-title">Patients</li>
       <% if can_read_and_write_patient %>
         <li class="nav-item">
-          <%= link_to new_medical_clinic_patient_path, class: "nav-link" do %>
+          <%= link_to new_backoffice_patient_path, class: "nav-link" do %>
             <svg class="nav-icon">
               <use xlink:href="<%= asset_path "/app/assets/coreui/icons-2/sprites/free.svg" %>#cil-plus"></use>
             </svg>
@@ -44,7 +44,7 @@
       <% end %>
       <% if can_read_patient %>
         <li class="nav-item">
-          <%= link_to medical_clinic_patients_path, class: "nav-link" do %>
+          <%= link_to backoffice_patients_path, class: "nav-link" do %>
             <svg class="nav-icon">
               <use xlink:href="<%= asset_path "/app/assets/coreui/icons-2/sprites/free.svg" %>#cil-people"></use>
             </svg>
@@ -53,14 +53,14 @@
         </li>
       <% end %>
     <% end %>
-    <% can_read_and_write_appointment = policy_for(current_user, MedicalClinic::AppointmentsController.controller_path).can_read_and_write? %>
-    <% can_read_appointment = policy_for(current_user, MedicalClinic::AppointmentsController.controller_path).can_read? %>
-    <% can_read_calendar = policy_for(current_user, MedicalClinic::CalendarController.controller_path).can_read? %>
+    <% can_read_and_write_appointment = policy_for(current_user, Backoffice::AppointmentsController.controller_path).can_read_and_write? %>
+    <% can_read_appointment = policy_for(current_user, Backoffice::AppointmentsController.controller_path).can_read? %>
+    <% can_read_calendar = policy_for(current_user, Backoffice::CalendarController.controller_path).can_read? %>
     <% if can_read_and_write_appointment || can_read_appointment || can_read_calendar %>
       <li class="nav-title">Appointments</li>
       <% if can_read_and_write_appointment %>
         <li class="nav-item">
-          <%= link_to new_medical_clinic_appointment_path, class: "nav-link" do %>
+          <%= link_to new_backoffice_appointment_path, class: "nav-link" do %>
             <svg class="nav-icon">
               <use xlink:href="<%= asset_path "/app/assets/coreui/icons-2/sprites/free.svg" %>#cil-plus"></use>
             </svg>
@@ -70,7 +70,7 @@
       <% end %>
       <% if can_read_appointment %>
         <li class="nav-item">
-          <%= link_to medical_clinic_appointments_path, class: "nav-link" do %>
+          <%= link_to backoffice_appointments_path, class: "nav-link" do %>
             <svg class="nav-icon">
               <use xlink:href="<%= asset_path "/app/assets/coreui/icons-2/sprites/free.svg" %>#cil-clock"></use>
             </svg>
@@ -80,7 +80,7 @@
       <% end %>
       <% if can_read_calendar %>
         <li class="nav-item">
-          <%= link_to medical_clinic_calendar_index_path, class: "nav-link" do %>
+          <%= link_to backoffice_calendar_index_path, class: "nav-link" do %>
             <svg class="nav-icon">
               <use xlink:href="<%= asset_path "/app/assets/coreui/icons-2/sprites/free.svg" %>#cil-calendar"></use>
             </svg>
@@ -92,64 +92,47 @@
     <li class="nav-divider"></li>
     <% can_read_and_write_attendant = policy_for(current_user, Backoffice::AttendantsController.controller_path).can_read_and_write? %>
     <% can_read_and_write_doctor = policy_for(current_user, Backoffice::DoctorsController.controller_path).can_read_and_write? %>
-    <% if can_read_and_write_attendant || can_read_and_write_doctor %>
-      <li class="nav-title">Medical Clinic</li>
-      <% if can_read_and_write_doctor %>
-        <li class="nav-group">
-          <a class="nav-link nav-group-toggle">
-            <svg class="nav-icon">
-              <use xlink:href="<%= asset_path "/app/assets/icons/hospital.svg" %>#vaadin--doctor"></use>
-            </svg>
-            <%= Doctor.model_name.human %>
-          </a>
-          <ul class="nav-group-items compact">
-            <li class="nav-item">
-              <%= link_to new_backoffice_doctor_path, class: "nav-link" do %>
-                <svg class="nav-icon">
-                  <use xlink:href="<%= asset_path "/app/assets/icons/manage.svg" %>#icon-park-solid--people-plus-one"></use>
-                </svg>
-                <%= t 'admin.new' %>
-              <% end %>
-            </li>
-            <li class="nav-item">
-              <%= link_to backoffice_doctors_path, class: "nav-link" do %>
-                <svg class="nav-icon">
-                  <use xlink:href="<%= asset_path "/app/assets/icons/manage.svg" %>#fluent--people-settings-20-filled"></use>
-                </svg>
-                <%= t 'admin.all' %>
-              <% end %>
-            </li>
-          </ul>
-        </li>
-      <% end %>
-      <% if can_read_and_write_attendant %>
-        <li class="nav-group">
-          <a class="nav-link nav-group-toggle" href="#">
-            <svg class="nav-icon">
-              <use xlink:href="<%= asset_path "/app/assets/icons/hospital.svg" %>#mdi--doctor"></use>
-            </svg>
-            <%= Attendant.model_name.human %>
-          </a>
-          <ul class="nav-group-items compact">
-            <li class="nav-item">
-              <%= link_to new_backoffice_attendant_path, class: "nav-link" do %>
-                <svg class="nav-icon">
-                  <use xlink:href="<%= asset_path "/app/assets/icons/manage.svg" %>#icon-park-solid--people-plus-one"></use>
-                </svg>
-                <%= t 'admin.new' %>
-              <% end %>
-            </li>
-            <li class="nav-item">
-              <%= link_to backoffice_attendants_path, class: "nav-link" do %>
-                <svg class="nav-icon">
-                  <use xlink:href="<%= asset_path "/app/assets/icons/manage.svg" %>#fluent--people-settings-20-filled"></use>
-                </svg>
-                <%= t 'admin.all' %>
-              <% end %>
-            </li>
-          </ul>
-        </li>
-      <% end %>
+    <% if can_read_and_write_doctor %>
+      <li class="nav-title">
+        <%= Doctor.model_name.human %>
+      </li>
+      <li class="nav-item">
+        <%= link_to new_backoffice_doctor_path, class: "nav-link" do %>
+          <svg class="nav-icon">
+            <use xlink:href="<%= asset_path "/app/assets/icons/manage.svg" %>#icon-park-solid--people-plus-one"></use>
+          </svg>
+          <%= t 'admin.new' %>
+        <% end %>
+      </li>
+      <li class="nav-item">
+        <%= link_to backoffice_doctors_path, class: "nav-link" do %>
+          <svg class="nav-icon">
+            <use xlink:href="<%= asset_path "/app/assets/icons/manage.svg" %>#fluent--people-settings-20-filled"></use>
+          </svg>
+          <%= t 'admin.all' %>
+        <% end %>
+      </li>
+    <% end %>
+    <% if can_read_and_write_attendant %>
+      <li class="nav-title">
+        <%= Attendant.model_name.human %>
+      </li>
+      <li class="nav-item">
+        <%= link_to new_backoffice_attendant_path, class: "nav-link" do %>
+          <svg class="nav-icon">
+            <use xlink:href="<%= asset_path "/app/assets/icons/manage.svg" %>#icon-park-solid--people-plus-one"></use>
+          </svg>
+          <%= t 'admin.new' %>
+        <% end %>
+      </li>
+      <li class="nav-item">
+        <%= link_to backoffice_attendants_path, class: "nav-link" do %>
+          <svg class="nav-icon">
+            <use xlink:href="<%= asset_path "/app/assets/icons/manage.svg" %>#fluent--people-settings-20-filled"></use>
+          </svg>
+          <%= t 'admin.all' %>
+        <% end %>
+      </li>
     <% end %>
   </ul>
   <div class="sidebar-footer border-top d-none d-md-flex">

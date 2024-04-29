@@ -4,4 +4,15 @@ en:
     dashboards: Dashboards
     all: All
     new: New
-    calendar: Calendar 
+    delete: Delete
+    edit: Edit
+    calendar: Calendar
+    statistics:
+      chart_1_title: "Patients added last week"
+    action_response:
+      view_options: View Options
+      created: "%{object_name} created successfully!"
+      updated: "%{object_name} updated successfully!"
+      deleted: "%{object_name} '%{name}' delete successfully!"
+    errors:
+      missing_date_time: "Missing date time interval"

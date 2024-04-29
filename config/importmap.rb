@@ -28,3 +28,4 @@ pin "@coreui/chartjs", to: "https://cdn.jsdelivr.net/npm/@coreui/chartjs@4.0.0/d
 pin "@coreui/utils", to: "https://cdn.jsdelivr.net/npm/@coreui/utils@2.0.2/dist/umd/index.js"
 pin "@coreui/icons", to: "https://cdn.jsdelivr.net/npm/@coreui/icons@3.0.1/dist/esm/index.js"
 pin "@coreui/admin", to: "coreui/admin/dist/admin.esm.js"
+pin "@rails/request.js", to: "@rails--request.js.js" # @0.0.9

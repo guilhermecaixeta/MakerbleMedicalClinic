@@ -1,4 +1,4 @@
-module MedicalClinic::AppointmentHelper
+module Backoffice::AppointmentHelper
   def doctors_selection
     Doctor.select(:id, :name).order(:name).all.map { |doctor| { id: doctor.id, name: doctor.name } }
   end

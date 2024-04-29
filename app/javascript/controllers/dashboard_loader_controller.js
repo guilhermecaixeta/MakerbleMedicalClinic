@@ -1,13 +1,14 @@
 import { Controller } from "@hotwired/stimulus";
+import { FetchRequest } from "@rails/request.js";
 
 export default class extends Controller {
   connect() {
     this.chartLoad();
   }
 
-  chartLoad() {
+  async chartLoad() {
     Chart.defaults.pointHitDetectionRadius = 1;
-    Chart.defaults.plugins.tooltip.enabled = false; 
+    Chart.defaults.plugins.tooltip.enabled = false;
     Chart.defaults.plugins.tooltip.mode = "index";
     Chart.defaults.plugins.tooltip.position = "nearest";
     Chart.defaults.plugins.tooltip.external = coreui.ChartJS.customTooltips;
@@ -43,26 +44,51 @@ export default class extends Controller {
 
     const random = (min, max) =>
       Math.floor(Math.random() * (max - min + 1) + min);
+    let request = new FetchRequest(
+      "get",
+      "/backoffice/statistics/weekly_for_patient.json",
+      {
+        contentType: "application/json",
+        responseKind: "json",
+      }
+    );
+    let response = await request.perform();
+    let weekly_patient_statistics = await response.json;
+    let total_patients_statistics =
+      weekly_patient_statistics.statistics_per_day.map((wps) => wps.total);
+
+    document.getElementById(
+      "statistic-total-patients"
+    ).innerHTML = `${weekly_patient_statistics.statistics_total} <span class="fs-6 fw-normal" id="statistic-total-patients-span"></span>`;
+    document.getElementById("statistic-total-patients-span").innerHTML = `(${
+      weekly_patient_statistics.growning
+    }%
+        <svg class="icon">
+          <use xlink:href="${
+            window.location.href
+          }/app/assets/coreui/icons-2/sprites/free.svg#${
+      weekly_patient_statistics.growning > 0
+        ? "cil-arrow-top"
+        : "cil-arrow-bottom"
+    }"></use>
+        </svg>)`;
+
     const cardChart1 = document.getElementById("card-chart1")
       ? new Chart(document.getElementById("card-chart1"), {
           type: "line",
           data: {
-            labels: [
-              "January",
-              "February",
-              "March",
-              "April",
-              "May",
-              "June",
-              "July",
-            ],
+            labels: weekly_patient_statistics.statistics_per_day.map((wps) =>
+              new Date(wps.date).toLocaleDateString(navigator.language, {
+                weekday: "long",
+              })
+            ),
             datasets: [
               {
-                label: "My First dataset",
+                label: "Weekly patients",
                 backgroundColor: "transparent",
                 borderColor: "rgba(255,255,255,.55)",
                 pointBackgroundColor: coreui.Utils.getStyle("--cui-primary"),
-                data: [65, 59, 84, 84, 51, 55, 40],
+                data: total_patients_statistics,
               },
             ],
           },
@@ -87,8 +113,8 @@ export default class extends Controller {
                 },
               },
               y: {
-                min: 30,
-                max: 89,
+                min: 0,
+                max: Math.ceil(total_patients_statistics.max / 10) * 10,
                 display: false,
                 grid: {
                   display: false,

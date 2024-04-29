@@ -2,6 +2,10 @@ module RescueConcern
   extend ActiveSupport::Concern
 
   included do
+    rescue_from DomainErrors::BaseDomainError do |e|
+      render json: { error: e.to_s }, status: 400
+    end
+
     rescue_from ActiveRecord::RecordInvalid do |e|
       render json: { error: e.to_s }, status: 422
     end

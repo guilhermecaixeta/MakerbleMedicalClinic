@@ -20,6 +20,10 @@ class Backoffice::DoctorsController < BackofficeController
   end
 
   def destroy
-    super 
+    super
+  end
+
+  def get_default_path
+    backoffice_doctor_path
   end
 end

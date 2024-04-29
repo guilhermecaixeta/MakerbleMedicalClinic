@@ -36,14 +36,17 @@ default_roles = [
                         "#{Backoffice::HomeController.controller_path}:read",
                         "#{Backoffice::AttendantsController.controller_path}:write",
                         "#{Backoffice::AttendantsController.controller_path}:read",
-                        "#{MedicalClinic::PatientsController.controller_path}:write",
-                        "#{MedicalClinic::AppointmentsController.controller_path}:write",
-                        "#{MedicalClinic::AppointmentsController.controller_path}:read"] },
+                        "#{Backoffice::PatientsController.controller_path}:write",
+                        "#{Backoffice::AppointmentsController.controller_path}:write",
+                        "#{Backoffice::ManagersController.controller_path}:write",
+                        "#{Backoffice::ManagersController.controller_path}:read"] },
   { name: "Operator",
    except_permissions: ["#{Backoffice::HomeController.controller_path}:write",
                         "#{Backoffice::HomeController.controller_path}:read",
                         "#{Backoffice::DoctorsController.controller_path}:read",
-                        "#{Backoffice::DoctorsController.controller_path}:write"] },
+                        "#{Backoffice::DoctorsController.controller_path}:write",
+                        "#{Backoffice::ManagersController.controller_path}:write",
+                        "#{Backoffice::ManagersController.controller_path}:read"] },
 ]
 
 if Role.all.empty?
@@ -56,18 +59,20 @@ if Role.all.empty?
 end
 
 puts "Checking permissions"
-default_permissions = ["#{Backoffice::HomeController.controller_path}:write",
+default_permissions = ["#{Backoffice::ManagersController.controller_path}:write",
+                       "#{Backoffice::ManagersController.controller_path}:read",
+                       "#{Backoffice::HomeController.controller_path}:write",
                        "#{Backoffice::HomeController.controller_path}:read",
                        "#{Backoffice::DoctorsController.controller_path}:read",
                        "#{Backoffice::DoctorsController.controller_path}:write",
                        "#{Backoffice::AttendantsController.controller_path}:write",
                        "#{Backoffice::AttendantsController.controller_path}:read",
-                       "#{MedicalClinic::CalendarController.controller_path}:write",
-                       "#{MedicalClinic::CalendarController.controller_path}:read",
-                       "#{MedicalClinic::PatientsController.controller_path}:write",
-                       "#{MedicalClinic::PatientsController.controller_path}:read",
-                       "#{MedicalClinic::AppointmentsController.controller_path}:write",
-                       "#{MedicalClinic::AppointmentsController.controller_path}:read"]
+                       "#{Backoffice::CalendarController.controller_path}:write",
+                       "#{Backoffice::CalendarController.controller_path}:read",
+                       "#{Backoffice::PatientsController.controller_path}:write",
+                       "#{Backoffice::PatientsController.controller_path}:read",
+                       "#{Backoffice::AppointmentsController.controller_path}:write",
+                       "#{Backoffice::AppointmentsController.controller_path}:read"]
 
 existing_permissions = Permission.all
 

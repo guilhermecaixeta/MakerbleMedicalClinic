@@ -1,4 +1,4 @@
-class Backoffice::AttendantsController < BackofficeController
+class Backoffice::ManagersController < BackofficeController
   def index
     super
   end
@@ -24,6 +24,6 @@ class Backoffice::AttendantsController < BackofficeController
   end
 
   def get_default_path
-    backoffice_attendant_path
+    backoffice_manager_path
   end
 end
