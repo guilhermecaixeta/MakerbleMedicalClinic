@@ -1,5 +1,5 @@
 class Patient < ApplicationRecord
-  has_many :appointments
+  has_many :appointments, dependent: :delete_all
 
   has_one_attached :avatar
 

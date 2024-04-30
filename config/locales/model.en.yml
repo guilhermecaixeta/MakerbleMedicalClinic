@@ -19,3 +19,7 @@ en:
     attributes:
       doctor:
         specialty_id: Specialty
+  errors:
+    messages:
+      cant_be_in_past: "can't be in the past"
+      overlapping_appointment: "there is another appointment at the same time"
