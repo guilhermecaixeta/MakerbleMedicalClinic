@@ -1,6 +1,18 @@
 Rails.application.routes.draw do
   namespace :backoffice do
-    get "home/index"
+    resources :operators, except: [:show]
+    resources :doctors, except: [:show]
+    resources :managers, except: [:show]
+    resources :calendar, only: [:index]
+    resource :home, only: [:index]
+    resources :appointments
+    resources :patients
+
+    post "doctors/filter_by_specialty", to: "doctors#filter_by_specialty"
+
+    get "statistics/weekly_grown_for_patient", to: "statistics#weekly_grown_for_patient"
+    get "statistics/weekly_grown_for_appointment", to: "statistics#weekly_grown_for_appointment"
+    get "statistics/monthly_relation_appointments_patients", to: "statistics#monthly_relation_appointments_patients"
   end
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 

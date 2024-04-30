@@ -7,7 +7,6 @@
  * --------------------------------------------------------------------------
  */
 
-class Toasts{}
 const toastTrigger = document.getElementById('liveToastBtn');
 const toastLiveExample = document.getElementById('liveToast');
 if (toastTrigger) {
@@ -16,6 +15,6 @@ if (toastTrigger) {
     toast.show();
   });
 }
-
-export default Toasts;
+export default class Toasts {}
+;
 //# sourceMappingURL=toasts.js.map

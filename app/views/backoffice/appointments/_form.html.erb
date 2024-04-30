@@ -1,0 +1,38 @@
+<%= form_with(model: [:backoffice, @object], remote: true, class: "row g-3 needs-validation") do |f| %>
+  <div class="row g-3 mb-3">
+    <div class="col-md-4">
+      <%= f.label :start_date_time, class: "form-label" %>
+      <%= f.datetime_local_field :start_date_time, class: "form-control" %>
+    </div>
+    <div class="col-md-4">
+      <%= f.label :end_date_time, class: "form-label" %>
+      <%= f.datetime_local_field :end_date_time, class: "form-control" %>
+    </div>
+    <div class="col-md-6">
+      <%= f.label :specialty, class: "form-label" %>
+      <%= f.collection_select :specialty_id,
+                              specialties_selection,
+                              :id,
+                              :name,
+                              { prompt: "Select a specialty"},
+                              { "data-specialty-selection-doctorid-value": @object.user_id || 0,
+                                "data-controller": "specialty-selection",
+                                "data-action": "change->specialty-selection#update_doctors",
+                                class: "form-select" }%>
+    </div>
+    <div class="col-md-6">
+      <%= f.label :doctor, class: "form-label" %>
+      <%= f.collection_select :user_id, [], :id, :name, { prompt: "Select a doctor" }, class: "form-select" %>
+    </div>
+    <div class="row mb-3">
+      <div class="col-md-6">
+        <%= f.label :patient, class: "form-label" %>
+        <%= f.collection_select :patient_id, patients_selection, :id, :name, { prompt: "Select a patient" }, class: "form-select" %>
+      </div>
+    </div>
+  </div>
+  <div class="col-12">
+    <%= f.submit t(action_name == "new" || action_name == "create" ? "helpers.submit.create" : "helpers.submit.update", model: ""), 
+    class: "btn btn-primary" %>
+  </div>
+<% end %>

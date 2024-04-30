@@ -1,4 +1,3 @@
-export { default as Main } from './src/main.js'
 export { default as ColorModes } from './src/color-modes.js'
 export { default as Colors } from './src/colors.js'
 export { default as Config } from './src/config.js'

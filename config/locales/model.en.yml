@@ -1,0 +1,21 @@
+en:
+  activerecord:
+    models:
+      doctor:
+        one: Doctor
+        other: Doctors
+      operator:
+        one: Operator
+        other: Operators
+      patient:
+        one: Patient
+        other: Patients
+      appointment:
+        one: Appointment
+        other: Appointments
+      manager:
+        one: Manager
+        other: Managers
+    attributes:
+      doctor:
+        specialty_id: Specialty

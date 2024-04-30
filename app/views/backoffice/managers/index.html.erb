@@ -1,0 +1,72 @@
+<% can_read_and_write = policy_for(current_user, Backoffice::ManagersController.controller_path).can_read_and_write? %>
+<div class="table-responsive">
+  <table class="table border mb-0">
+    <thead class="fw-semibold text-nowrap">
+      <tr class="align-middle">
+        <th class="bg-body-secondary text-center">
+          <svg class="icon">
+            <use xlink:href="<%= asset_path "/app/assets/coreui/icons-2/sprites/free.svg" %>#cil-people"></use>
+          </svg>
+        </th>
+        <th class="bg-body-secondary">
+          <%= Manager.human_attribute_name 'name' %>
+        </th>
+        <th class="bg-body-secondary">
+          <%= Manager.human_attribute_name 'email' %>
+        </th>
+        <% if can_read_and_write %>
+          <th class="bg-body-secondary">
+          </th>
+        <% end %>
+      </tr>
+    </thead>
+    <tbody class="align-middle">
+      <% @objects.each do |obj| %>
+        <tr class="align-middle">
+          <td class="text-center">
+            <div class="avatar avatar-md">
+              <% if obj.avatar.attached? %>
+                <%= image_tag obj.avatar.variant(resize_to_limit: [128, 128]).processed, class: "avatar-img", alt: obj.email %>
+              <% else %>
+                <%= image_tag "no_defined_image.jpg", class: "avatar-img", alt: obj.email %>
+              <% end %>
+            </div>
+          </td>
+          <td>
+            <div class="text-nowrap">
+              <%= obj.name %>
+            </div>
+          </td>
+          <td>
+            <div class="text-nowrap">
+              <%= obj.email %>
+            </div>
+          </td>
+          <td>
+            <div class="text-nowrap">
+            <%= obj.roles.map{|role| role.name}.join(', ') %>
+            </div>
+          </td>
+          <% if can_read_and_write %>
+            <td>
+              <div class="dropdown">
+                <button class="btn btn-transparent p-0" type="button" data-coreui-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  <svg class="icon">
+                    <use xlink:href="<%= asset_path "/app/assets/coreui/icons-2/sprites/free.svg" %>#cil-options"></use>
+                  </svg>
+                </button>
+                <div class="dropdown-menu dropdown-menu-end">
+                  <%= link_to t("admin.edit"), edit_backoffice_manager_path(obj), class: "dropdown-item" %>
+                  <%= link_to t("admin.delete"), backoffice_manager_path(obj), data: { "turbo-method": :delete }, class: "dropdown-item text-danger" %>
+                </div>
+              </div>
+            </td>
+          <% end %>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+  <div class="pag-bar mt-3 pt-3">
+    <%== pagy_bootstrap_nav(@pagy) %>
+  </div>
+</div>

@@ -51,8 +51,6 @@ RUN echo -e '\n. /usr/local/asdf/asdf.sh' >> /home/vscode/.bashrc && \
     echo -e "\nexport PATH=\"/home/vscode/.gems/bin:\$PATH\"" >> /home/vscode/.bashrc 
     
 COPY .tool-versions ./
-COPY .ruby-version ./
-COPY .vscode ./.vscode
 
 ### Install Ruby and Node.js using asdf
 RUN asdf plugin add ruby
