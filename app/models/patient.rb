@@ -3,8 +3,6 @@ class Patient < ApplicationRecord
 
   has_one_attached :avatar
 
-  has_one_attached :avatar
-
   validates :name, :email, :birthday, :address, :phone, presence: true
   validates :name, length: { minimum: 3, maximum: 255 }
   validates :email, length: { minimum: 3, maximum: 255 }, uniqueness: true
