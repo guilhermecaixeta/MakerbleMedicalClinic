@@ -41,15 +41,8 @@ gem "tzinfo-data", platforms: %i[ windows jruby ]
 # Reduces boot times through caching; required in config/boot.rb
 gem "bootsnap", require: false
 
-# This library provides integration of the money gem with Rails.
-# https://github.com/RubyMoney/money-rails
-gem "money-rails", "~> 1.12"
-
 # Use Active Storage variants [https://guides.rubyonrails.org/active_storage_overview.html#transforming-images]
 gem "image_processing", "~> 1.2"
-
-# The static type checker
-gem "sorbet-static-and-runtime"
 
 # Style
 gem "bootstrap", ">= 5.1.3"
@@ -66,6 +59,7 @@ gem "i18n-inflector"
 # Auth and Autentication
 gem "devise", "~> 4.9"
 gem "devise-i18n"
+
 # Pundit provides a set of helpers which guide you in leveraging regular Ruby classes and object oriented design patterns to build a straightforward, robust, and scalable authorization system.
 gem "pundit"
 

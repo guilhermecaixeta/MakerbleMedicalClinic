@@ -3,6 +3,8 @@
 en:
   devise:
     confirmations:
+      confirm_email: "Confirm email"
+      resend_instructions: "Resend instructions"
       confirmed: "Your email address has been successfully confirmed."
       send_instructions: "You will receive an email with instructions for how to confirm your email address in a few minutes."
       send_paranoid_instructions: "If your email address exists in our database, you will receive an email with instructions for how to confirm your email address in a few minutes."
@@ -27,10 +29,12 @@ en:
         subject: "Email Changed"
       password_change:
         subject: "Password Changed"
-    omniauth_callbacks:
-      failure: "Could not authenticate you from %{kind} because \"%{reason}\"."
-      success: "Successfully authenticated from %{kind} account."
     passwords:
+      forgot_password: "Forgot your password?"
+      recovering_email: "Recovering email"
+      send_recover_instructions: "Send recover instructions"
+      recover_password: "Recover your password"
+      set_new_password: "Set new password"
       no_token: "You can't access this page without coming from a password reset email. If you do come from a password reset email, please make sure you used the full URL provided."
       send_instructions: "You will receive an email with instructions on how to reset your password in a few minutes."
       send_paranoid_instructions: "If your email address exists in our database, you will receive a password recovery link at your email address in a few minutes."
@@ -52,8 +56,9 @@ en:
       login: "Login"
       logout: "Logout"
       forgot_password: "Forgot Password?"
-      forgot_password_message: "Don't worry if you forgot your password, click in the button below and recover it!"
       reset_password: "Reset your password"
+      new_confirmation_title: "Not confirmed yet?"
+      new_confirmation_text: " Click in the button and receive a new confirmation email!"
       signed_in: "Signed in successfully."
       signed_out: "Signed out successfully."
       already_signed_out: "Signed out successfully."

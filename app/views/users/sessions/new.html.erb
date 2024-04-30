@@ -38,7 +38,7 @@
                   <%= f.submit t('devise.sessions.login'), class: "btn btn-primary px-4" %>
                 </div>
                 <div class="col-6 text-end">
-                  <%= link_to edit_user_password_path, class: "btn btn-link px-0" do %>
+                  <%= link_to new_user_password_path, class: "btn btn-link px-0" do %>
                     <%= t('devise.sessions.forgot_password') %>
                   <% end %>
                 </div>
@@ -50,12 +50,12 @@
           <div class="card-body text-center">
             <div>
               <h2>
-                <%= t 'devise.sessions.forgot_password' %>
+                <%= t 'devise.sessions.new_confirmation_title' %>
               </h2>
               <p>
-                <%= t 'devise.sessions.forgot_password_message' %>
+                <%= t 'devise.sessions.new_confirmation_text' %>
               </p>
-              <%= button_to t('devise.sessions.reset_password'), edit_user_password_path, class: "btn btn-lg btn-outline-light mt-3" %>
+              <%= link_to t('devise.sessions.request_new_confirmation'), new_user_confirmation_path, class: "btn btn-lg btn-outline-light mt-3" %>
             </div>
           </div>
         </div>
