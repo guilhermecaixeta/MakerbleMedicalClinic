@@ -25,9 +25,6 @@
       <div class="col-md-4">
         <%= f.label :birthday, class: "form-label" %>
         <%= f.date_field :birthday, class: "form-control" %>
-        <div class="valid-feedback">
-          Looks good!
-        </div>
       </div>
       <div class="col-md-4">
         <%= f.label :email, class: "form-label" %>
@@ -42,6 +39,13 @@
       <div class="col-md-4">
         <%= f.label :password_confirmation, class: "form-label" %>
         <%= f.password_field :password_confirmation, class: "form-control" %>
+      </div>
+      <div class="col-md-4">
+        <%= f.collection_check_boxes(:role_ids, role_options, :id, :name)  do |b| %>
+          <div class="form-check form-switch">
+            <%= b.label(class: "form-check-label") { b.check_box(class: "form-check-input") + b.text } %>
+          </div>
+        <% end %>
       </div>
     </div>
     <div class="col-12">
