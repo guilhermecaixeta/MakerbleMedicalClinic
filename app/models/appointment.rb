@@ -5,6 +5,7 @@ class Appointment < ApplicationRecord
 
   validates :start_date_time, :end_date_time, presence: true
   validates :end_date_time, comparison: { greater_than: :start_date_time }
+  validate :appointment_cannot_be_in_the_past, :appointment_cannot_overlap_existing_one
 
   scope :get_by_user_in_interval, ->(id, start_date, end_date) {
           where("appointments.user_id = :id", { id: id })
@@ -41,4 +42,26 @@ class Appointment < ApplicationRecord
             .select("COUNT(id) as total, date_trunc('day', start_date_time::date) as current_day")
             .order(:current_day)
         }
+
+  def appointment_cannot_be_in_the_past
+    if start_date_time < Time.now
+      errors.add(:start_date_time, I18n.t("errors.messages.cant_be_in_past"))
+    end
+    if end_date_time < Time.now
+      errors.add(:end_date_time, I18n.t("errors.messages.cant_be_in_past"))
+    end
+  end
+
+  def appointment_cannot_overlap_existing_one
+    is_overlapping = Appointment.where("end_date_time >= :start_date_time AND start_date_time <= :end_date_time AND user_id = :user_id AND patient_id = :patient_id",
+                                       { start_date_time: start_date_time,
+                                         end_date_time: end_date_time,
+                                         user_id: user_id,
+                                         patient_id: patient_id }).exists?
+
+    if is_overlapping
+      errors.add(:start_date_time, I18n.t("errors.messages.overlapping_appointment"))
+      errors.add(:end_date_time, I18n.t("errors.messages.overlapping_appointment"))
+    end
+  end
 end
