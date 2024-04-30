@@ -43,13 +43,6 @@
         <%= f.label :password_confirmation, class: "form-label" %>
         <%= f.password_field :password_confirmation, class: "form-control" %>
       </div>
-      <div class="col-md-4">
-        <%= f.collection_check_boxes(:role_ids, role_options, :id, :name)  do |b| %>
-          <div class="form-check form-switch">
-            <%= b.label(class: "form-check-label") { b.check_box(class: "form-check-input", disabled: controller_name == "members") + b.text } %>
-          </div>
-        <% end %>
-      </div>
     </div>
     <div class="col-12">
       <%= f.submit t(action_name == "new" || action_name == "create" ? "helpers.submit.create" : "helpers.submit.update", model: ""), class: "btn btn-primary" %>

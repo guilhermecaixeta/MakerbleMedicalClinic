@@ -52,7 +52,7 @@
               <%= obj.specialty_name %>
             </div>
           </td>
-          <% if can_read_and_write %>
+          <% if can_read_and_write && obj.start_date_time >= Time.now %>
             <td>
               <div class="dropdown">
                 <button class="btn btn-transparent p-0" type="button" data-coreui-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -66,6 +66,8 @@
                 </div>
               </div>
             </td>
+          <% else %>
+            <td></td>
           <% end %>
         </tr>
       <% end %>
