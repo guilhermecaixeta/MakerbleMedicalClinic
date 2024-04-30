@@ -1,0 +1,77 @@
+<% can_read_and_write = policy_for(current_user, Backoffice::AppointmentsController.controller_path).can_read_and_write? %>
+<div class="table-responsive">
+  <table class="table border mb-0">
+    <thead class="fw-semibold text-nowrap">
+      <tr class="align-middle">
+        <th class="bg-body-secondary">
+          <%= Appointment.human_attribute_name 'start_date_time' %>
+        </th>
+        <th class="bg-body-secondary">
+          <%= Appointment.human_attribute_name 'end_date_time' %>
+        </th>
+        <th class="bg-body-secondary">
+          <%= Appointment.human_attribute_name 'doctor' %>
+        </th>
+        <th class="bg-body-secondary">
+          <%= Appointment.human_attribute_name 'patient' %>
+        </th>
+        <th class="bg-body-secondary">
+          <%= Appointment.human_attribute_name 'specialty' %>
+        </th>
+        <% if can_read_and_write %>
+          <th class="bg-body-secondary">
+          </th>
+        <% end %>
+      </tr>
+    </thead>
+    <tbody class="align-middle">
+      <% @objects.each do |obj| %>
+        <tr class="align-middle">
+          <td>
+            <div class="text-nowrap">
+              <%= obj.start_date_time.to_formatted_s(:short) %>
+            </div>
+          </td>
+          <td>
+            <div class="text-nowrap">
+              <%= obj.end_date_time.to_formatted_s(:short) %>
+            </div>
+          </td>
+          <td>
+            <div class="text-nowrap">
+              <%= obj.doctor_name %>
+            </div>
+          </td>
+          <td>
+            <div class="text-nowrap">
+              <%= obj.patient_name %>
+            </div>
+          </td>
+          <td>
+            <div class="text-nowrap">
+              <%= obj.specialty_name %>
+            </div>
+          </td>
+          <% if can_read_and_write %>
+            <td>
+              <div class="dropdown">
+                <button class="btn btn-transparent p-0" type="button" data-coreui-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  <svg class="icon">
+                    <use xlink:href="<%= asset_path "/app/assets/coreui/icons-2/sprites/free.svg" %>#cil-options"></use>
+                  </svg>
+                </button>
+                <div class="dropdown-menu dropdown-menu-end">
+                  <%= link_to t("admin.edit"), edit_backoffice_appointment_path(obj), class: "dropdown-item" %>
+                  <%= link_to t("admin.delete"), backoffice_appointment_path(obj), data: { "turbo-method": :delete }, class: "dropdown-item text-danger" %>
+                </div>
+              </div>
+            </td>
+          <% end %>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+  <div class="pag-bar mt-3 pt-3">
+    <%== pagy_bootstrap_nav(@pagy) %>
+  </div>
+</div>

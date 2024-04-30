@@ -5,7 +5,6 @@
  * --------------------------------------------------------------------------
  */
 
-class Config {}
 (() => {
   const THEME = 'coreui-free-bootstrap-admin-template-theme';
   const urlParams = new URLSearchParams(window.location.href.split('?')[1]);
@@ -13,6 +12,6 @@ class Config {}
     localStorage.setItem(THEME, urlParams.get('theme'));
   }
 })();
-
-export default Config
+export default class Config {}
+;
 //# sourceMappingURL=config.js.map

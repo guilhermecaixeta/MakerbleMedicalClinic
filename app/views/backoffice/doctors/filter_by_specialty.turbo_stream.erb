@@ -1,0 +1,11 @@
+<% if flash[:error].present? %>
+  <%= render_turbo_stream_flash_messages %>
+<% else %>
+  <%= turbo_stream.replace "appointment_user_id" do %>
+    <%= select_tag :user_id, options_from_collection_for_select(@doctors, "id", "name", @selected_doctor),
+                   prompt: "Select a doctor",
+                   class: "form-select",
+                   name: "appointment[user_id]",
+                   id: "appointment_user_id" %>
+  <% end %>
+<% end %>

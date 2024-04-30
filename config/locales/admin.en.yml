@@ -1,3 +1,20 @@
 en:
   admin:
-    
+    title: "Makerble Medical"
+    dashboards: Dashboards
+    all: All
+    new: New
+    delete: Delete
+    edit: Edit
+    calendar: Calendar
+    statistics:
+      weekly_statistic_patient: "Patients added last week"
+      weekly_statistic_appointment: "Appointments added last week"
+      monthly_statistic: "Monthly statistic"
+    action_response:
+      view_options: View Options
+      created: "%{object_name} created successfully!"
+      updated: "%{object_name} updated successfully!"
+      deleted: "%{object_name} '%{name}' delete successfully!"
+    errors:
+      missing_date_time: "Missing date time interval"

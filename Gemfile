@@ -41,15 +41,8 @@ gem "tzinfo-data", platforms: %i[ windows jruby ]
 # Reduces boot times through caching; required in config/boot.rb
 gem "bootsnap", require: false
 
-# This library provides integration of the money gem with Rails.
-# https://github.com/RubyMoney/money-rails
-gem "money-rails", "~> 1.12"
-
 # Use Active Storage variants [https://guides.rubyonrails.org/active_storage_overview.html#transforming-images]
 gem "image_processing", "~> 1.2"
-
-# The static type checker
-gem "sorbet-static-and-runtime"
 
 # Style
 gem "bootstrap", ">= 5.1.3"
@@ -57,11 +50,21 @@ gem "bootstrap", ">= 5.1.3"
 # Process scss
 gem "dartsass-sprockets", "~> 3.1"
 
+# Repository for collecting Locale data for Ruby on Rails I18n as well as other interesting, Rails related I18n stuff http://rails-i18n.org
+gem "rails-i18n"
+
+# Enhances simple I18n backend in a way that it inflects translation data using pattern interpolation. https://rubydoc.info/gems/i18n-inflector/2.6.6/file/docs/USAGE
+gem "i18n-inflector"
+
 # Auth and Autentication
 gem "devise", "~> 4.9"
 gem "devise-i18n"
+
 # Pundit provides a set of helpers which guide you in leveraging regular Ruby classes and object oriented design patterns to build a straightforward, robust, and scalable authorization system.
 gem "pundit"
+
+# Pagination
+gem "pagy", "~> 8.3"
 
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
@@ -70,6 +73,7 @@ group :development, :test do
   gem "shoulda-matchers", "~> 6.0"
   gem "factory_bot_rails", "~> 6.4"
   gem "rails-controller-testing", "~> 1.0"
+  gem "tapioca", require: false
 end
 
 group :development do
@@ -82,10 +86,15 @@ group :development do
   # Speed up commands on slow machines / big apps [https://github.com/rails/spring]
   # gem "spring"
 
-  # erb-lint is a tool to help lint your ERB or HTML files using the included linters or by writing your own.
+  # Faker is a port of Perl's Data::Faker library. It's a library for generating fake data such as names, addresses, and phone numbers.
+  gem "faker"
+  #Better Errors replaces the standard Rails error page with a much better and more useful error page. It is also usable outside of Rails in any Rack app as Rack middleware.
+  gem "better_errors"
+  # Code
   gem "erb_lint", require: false
-
   gem "solargraph"
+  # The static type checker
+  gem "sorbet-static-and-runtime"
 end
 
 group :test do

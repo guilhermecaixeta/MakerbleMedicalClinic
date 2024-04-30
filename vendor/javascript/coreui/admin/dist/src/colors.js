@@ -7,9 +7,6 @@
  * --------------------------------------------------------------------------
  */
 
-class Colors {}
-
-
 for (const element of document.querySelectorAll('.theme-color')) {
   const color = getComputedStyle(element, null).getPropertyValue('background-color');
   const table = document.createElement('table');
@@ -27,8 +24,7 @@ for (const element of document.querySelectorAll('.theme-color')) {
       </table>
     `;
   element.parentNode.append(table);
-
 }
-
-export default Colors;
+export default class Colors {}
+;
 //# sourceMappingURL=colors.js.map

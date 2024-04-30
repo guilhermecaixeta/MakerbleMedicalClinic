@@ -84,6 +84,10 @@ GEM
     base64 (0.2.0)
     bcrypt (3.1.20)
     benchmark (0.3.0)
+    better_errors (2.10.1)
+      erubi (>= 1.0.0)
+      rack (>= 0.9.0)
+      rouge (>= 1.0.0)
     better_html (2.1.1)
       actionview (>= 6.0)
       activesupport (>= 6.0)
@@ -146,6 +150,8 @@ GEM
     factory_bot_rails (6.4.3)
       factory_bot (~> 6.4)
       railties (>= 5.0.0)
+    faker (3.3.1)
+      i18n (>= 1.8.11, < 2)
     ffi (1.16.3)
     globalid (1.2.1)
       activesupport (>= 6.1)
@@ -163,6 +169,8 @@ GEM
       rake (>= 13)
     i18n (1.14.4)
       concurrent-ruby (~> 1.0)
+    i18n-inflector (2.6.7)
+      i18n (>= 0.4.1)
     image_processing (1.12.2)
       mini_magick (>= 4.9.5, < 5)
       ruby-vips (>= 2.0.17, < 3)
@@ -197,15 +205,6 @@ GEM
     mini_magick (4.12.0)
     mini_mime (1.1.5)
     minitest (5.22.3)
-    monetize (1.13.0)
-      money (~> 6.12)
-    money (6.19.0)
-      i18n (>= 0.6.4, <= 2)
-    money-rails (1.15.0)
-      activesupport (>= 3.0)
-      monetize (~> 1.9)
-      money (~> 6.13)
-      railties (>= 3.0)
     msgpack (1.7.2)
     mutex_m (0.2.0)
     net-imap (0.4.10)
@@ -217,6 +216,7 @@ GEM
       timeout
     net-smtp (0.5.0)
       net-protocol
+    netrc (0.11.0)
     nio4r (2.7.1)
     nokogiri (1.16.4-aarch64-linux)
       racc (~> 1.4)
@@ -231,12 +231,14 @@ GEM
     nokogiri (1.16.4-x86_64-linux)
       racc (~> 1.4)
     orm_adapter (0.5.0)
+    pagy (8.3.0)
     parallel (1.24.0)
     parser (3.3.0.5)
       ast (~> 2.4.1)
       racc
     pg (1.5.6)
     popper_js (2.11.8)
+    prism (0.27.0)
     psych (5.1.2)
       stringio
     public_suffix (5.0.5)
@@ -278,6 +280,9 @@ GEM
     rails-html-sanitizer (1.6.0)
       loofah (~> 2.21)
       nokogiri (~> 1.14)
+    rails-i18n (7.0.9)
+      i18n (>= 0.7, < 2)
+      railties (>= 6.0.0, < 8)
     railties (7.1.3.2)
       actionpack (= 7.1.3.2)
       activesupport (= 7.1.3.2)
@@ -288,6 +293,9 @@ GEM
       zeitwerk (~> 2.6)
     rainbow (3.1.1)
     rake (13.2.1)
+    rbi (0.1.12)
+      prism (>= 0.18.0, < 0.28)
+      sorbet-runtime (>= 0.5.9204)
     rbs (2.8.4)
     rdoc (6.6.3.1)
       psych (>= 4.0.0)
@@ -300,6 +308,7 @@ GEM
     reverse_markdown (2.1.1)
       nokogiri
     rexml (3.2.6)
+    rouge (4.2.1)
     rspec-core (3.13.0)
       rspec-support (~> 3.13.0)
     rspec-expectations (3.13.0)
@@ -381,6 +390,11 @@ GEM
     sorbet-static-and-runtime (0.5.11346)
       sorbet (= 0.5.11346)
       sorbet-runtime (= 0.5.11346)
+    spoom (1.3.0)
+      erubi (>= 1.10.0)
+      prism (>= 0.19.0)
+      sorbet-static-and-runtime (>= 0.5.10187)
+      thor (>= 0.19.2)
     sprockets (4.2.1)
       concurrent-ruby (~> 1.0)
       rack (>= 2.2.4, < 4)
@@ -391,6 +405,15 @@ GEM
     stimulus-rails (1.3.3)
       railties (>= 6.0.0)
     stringio (3.1.0)
+    tapioca (0.13.3)
+      bundler (>= 2.2.25)
+      netrc (>= 0.11.0)
+      parallel (>= 1.21.0)
+      rbi (>= 0.1.4, < 0.2)
+      sorbet-static-and-runtime (>= 0.5.11087)
+      spoom (>= 1.2.0)
+      thor (>= 1.2.0)
+      yard-sorbet
     thor (1.3.1)
     tilt (2.3.0)
     timeout (0.4.1)
@@ -416,6 +439,9 @@ GEM
     xpath (3.2.0)
       nokogiri (~> 1.8)
     yard (0.9.36)
+    yard-sorbet (0.8.1)
+      sorbet-runtime (>= 0.5)
+      yard (>= 0.9)
     zeitwerk (2.6.13)
 
 PLATFORMS
@@ -427,6 +453,7 @@ PLATFORMS
   x86_64-linux
 
 DEPENDENCIES
+  better_errors
   bootsnap
   bootstrap (>= 5.1.3)
   capybara
@@ -436,15 +463,18 @@ DEPENDENCIES
   devise-i18n
   erb_lint
   factory_bot_rails (~> 6.4)
+  faker
+  i18n-inflector
   image_processing (~> 1.2)
   importmap-rails
   jbuilder
-  money-rails (~> 1.12)
+  pagy (~> 8.3)
   pg (~> 1.1)
   puma (>= 5.0)
   pundit
   rails (~> 7.1.3, >= 7.1.3.2)
   rails-controller-testing (~> 1.0)
+  rails-i18n
   rspec-rails (~> 6.1.0)
   selenium-webdriver
   shoulda-matchers (~> 6.0)
@@ -452,6 +482,7 @@ DEPENDENCIES
   sorbet-static-and-runtime
   sprockets-rails
   stimulus-rails
+  tapioca
   turbo-rails
   tzinfo-data
   web-console

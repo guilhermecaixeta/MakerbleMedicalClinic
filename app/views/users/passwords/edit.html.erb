@@ -1,25 +1,40 @@
-<h2>Change your password</h2>
-
-<%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :put }) do |f| %>
-  <%= render "users/shared/error_messages", resource: resource %>
-  <%= f.hidden_field :reset_password_token %>
-
-  <div class="field">
-    <%= f.label :password, "New password" %><br />
-    <% if @minimum_password_length %>
-      <em>(<%= @minimum_password_length %> characters minimum)</em><br />
-    <% end %>
-    <%= f.password_field :password, autofocus: true, autocomplete: "new-password" %>
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-md-6">
+      <div class="card mb-4 mx-4">
+        <div class="card-body p-4">
+          <h1>
+            <%= t 'devise.passwords.recover_password' %>
+          </h1>
+          <p class="text-body-secondary">
+            <%= t 'devise.passwords.set_new_password' %>
+          </p>
+          <%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :put }) do |f| %>
+            <%= render "users/shared/error_messages", resource: resource %>
+            <%= f.hidden_field :reset_password_token %>
+            <div class="input-group mb-3">
+              <span class="input-group-text">
+                <svg class="icon">
+                  <use xlink:href="<%= asset_path "/app/assets/coreui/icons-2/sprites/free.svg" %>#cil-lock-locked"></use>
+                </svg>
+              </span>
+              <%= f.password_field :password, autofocus: true, class: "form-control", autocomplete: "new-password", placeholder: "Password" %>
+            </div>
+            <% if @minimum_password_length %>
+              <em>(<%= @minimum_password_length %> characters minimum)</em>
+            <% end %>
+            <div class="input-group mb-3">
+              <span class="input-group-text">
+                <svg class="icon">
+                  <use xlink:href="<%= asset_path "/app/assets/coreui/icons-2/sprites/free.svg" %>#cil-lock-locked"></use>
+                </svg>
+              </span>
+              <%= f.password_field :password_confirmation, class: "form-control", placeholder: "Repeat password" %>
+            </div>
+            <%= f.submit "Send me reset password instructions", class: "btn btn-block btn-success" %>
+          <% end %>
+        </div>
+      </div>
+    </div>
   </div>
-
-  <div class="field">
-    <%= f.label :password_confirmation, "Confirm new password" %><br />
-    <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
-  </div>
-
-  <div class="actions">
-    <%= f.submit "Change my password" %>
-  </div>
-<% end %>
-
-<%= render "users/shared/links" %>
+</div>
