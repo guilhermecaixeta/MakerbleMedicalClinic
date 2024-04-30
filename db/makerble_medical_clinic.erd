@@ -20,7 +20,7 @@ entity Doctor extends User {
     id key
 }
 
-entity Attendant extends User {
+entity Operator extends User {
     id key
 }
 

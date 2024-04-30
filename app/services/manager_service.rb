@@ -1,19 +1,20 @@
 # typed: true
 # frozen_string_literal: true
 
-class AttendantService
+class ManagerService
   def self.create(params)
-    @attendant = Attendant.new(params)
+    @manager = Manager.new(params)
 
-    if @attendant.valid?
-      @attendant.save!
+    if @manager.valid?
+      @manager.save!
     end
 
-    @attendant
+    @manager.send_confirmation_instructions
+    @manager
   end
 
-  def self.update(params, attendant)
-    @attendant = attendant
+  def self.update(params, manager)
+    @manager = manager
     password = params["password"]
     password_confirmation = params["password_confirmation"]
 
@@ -22,12 +23,12 @@ class AttendantService
       params.delete(:password_confirmation)
     end
 
-    @attendant.assign_attributes(params)
+    @manager.assign_attributes(params)
 
-    if @attendant.valid?
-      @attendant.save!
+    if @manager.valid?
+      @manager.save!
     end
 
-    @attendant
+    @manager
   end
 end

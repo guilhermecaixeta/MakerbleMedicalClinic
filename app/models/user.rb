@@ -10,4 +10,16 @@ class User < ApplicationRecord
 
   validates :name, presence: true, length: { minimum: 3, maximum: 255 }
   validates :birthday, presence: true, comparison: { less_than_or_equal_to: Time.now }
+
+  def is_doctor?
+    self.roles.where(name: "Doctor").exists?
+  end
+
+  def is_operator?
+    self.roles.where(name: "Operator").exists?
+  end
+
+  def is_admin?
+    self.roles.where(name: "Administrator").exists?
+  end
 end

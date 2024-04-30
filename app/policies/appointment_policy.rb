@@ -5,9 +5,26 @@ class AppointmentPolicy < ApplicationPolicy
 
   class Scope < ApplicationPolicy::Scope
     def resolve
-      Appointment.includes(:doctor, :patient, :specialty)
-        .select(:id, :name, :email, :'doctor.name', :'patient.name', :'specialty.name')
-        .order(:name)
+      if @user.is_doctor?
+        Appointment.joins(:doctor, :patient, :specialty)
+          .where(user_id: user.id)
+          .select("appointments.id",
+                  "appointments.start_date_time",
+                  "appointments.end_date_time",
+                  "users.name as doctor_name",
+                  "patients.name as patient_name",
+                  "specialties.name as specialty_name")
+          .order("appointments.start_date_time")
+      else
+        Appointment.joins(:doctor, :patient, :specialty)
+          .select("appointments.id",
+                  "appointments.start_date_time",
+                  "appointments.end_date_time",
+                  "users.name as doctor_name",
+                  "patients.name as patient_name",
+                  "specialties.name as specialty_name")
+          .order("appointments.start_date_time")
+      end
     end
   end
 end

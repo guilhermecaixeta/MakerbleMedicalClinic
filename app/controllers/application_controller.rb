@@ -14,12 +14,12 @@ class ApplicationController < ActionController::Base
   end
 
   def after_sign_in_path_for(resource)
-    if resource.roles.find_by(name: "Administrator")
+    if resource.is_admin?
       root_path
-    elsif resource.roles.find_by(name: "Doctor")
+    elsif resource.is_doctor?
       backoffice_doctors_path
-    elsif resource.roles.find_by(name: "Operator")
-      backoffice_attendants_index_path
+    elsif resource.is_operator?
+      backoffice_operators_path
     end
   end
 end

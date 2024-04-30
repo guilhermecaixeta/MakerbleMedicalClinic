@@ -24,6 +24,6 @@ class Backoffice::PatientsController < BackofficeController
   end
 
   def get_default_path
-    backoffice_patient_path
+    backoffice_patients_path
   end
 end

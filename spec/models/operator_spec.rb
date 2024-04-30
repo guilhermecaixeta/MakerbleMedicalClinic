@@ -1,8 +1,8 @@
 require "rails_helper"
 
-RSpec.describe Attendant, type: :model do
+RSpec.describe Operator, type: :model do
   describe "validation" do
-    subject { FactoryBot.build(:attendant) }
+    subject { FactoryBot.build(:operator) }
 
     it "is valid when has all required attributes" do
       expect(subject).to be_valid

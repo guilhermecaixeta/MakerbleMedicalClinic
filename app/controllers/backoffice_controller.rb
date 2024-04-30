@@ -50,7 +50,7 @@ class BackofficeController < ApplicationController
   end
 
   def destroy
-    default_name = @object.name
+    default_name = @object.has_attribute?(:name) ? @object.name : ""
 
     respond_to do |format|
       if @object.destroy
@@ -67,6 +67,6 @@ class BackofficeController < ApplicationController
   end
 
   def policy(user)
-    UserPolicy.new(user, controller_path)
+    UserPolicy.new(current_user, controller_path)
   end
 end

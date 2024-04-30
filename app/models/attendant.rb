@@ -1,2 +1,0 @@
-class Attendant < User
-end

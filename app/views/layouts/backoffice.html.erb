@@ -19,8 +19,8 @@
     <%= render partial: "shared/backoffice/sidebar" %>
     <div class="wrapper d-flex flex-column min-vh-100">
       <%= render partial: "shared/backoffice/header" %>
-      <%= render partial: "shared/backoffice/alerts" %>
       <main class="body flex-grow-1 container px-4 mb-4">
+        <%= render partial: "shared/backoffice/alerts" %>
         <%= yield %>
       </main>
       <%= render partial: "shared/backoffice/footer" %>

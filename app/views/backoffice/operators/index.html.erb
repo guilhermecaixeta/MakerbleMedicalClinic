@@ -1,4 +1,4 @@
-<% can_read_and_write = policy_for(current_user, Backoffice::AttendantsController.controller_path).can_read_and_write? %>
+<% can_read_and_write = policy_for(current_user, Backoffice::OperatorsController.controller_path).can_read_and_write? %>
 <div class="table-responsive">
   <table class="table border mb-0">
     <thead class="fw-semibold text-nowrap">
@@ -9,10 +9,10 @@
           </svg>
         </th>
         <th class="bg-body-secondary">
-          <%= Attendant.human_attribute_name 'name' %>
+          <%= Operator.human_attribute_name 'name' %>
         </th>
         <th class="bg-body-secondary">
-          <%= Attendant.human_attribute_name 'email' %>
+          <%= Operator.human_attribute_name 'email' %>
         </th>
         <% if can_read_and_write %>
           <th class="bg-body-secondary">
@@ -51,8 +51,8 @@
                   </svg>
                 </button>
                 <div class="dropdown-menu dropdown-menu-end">
-                  <%= link_to t("admin.edit"), edit_backoffice_attendant_path(obj), class: "dropdown-item" %>
-                  <%= link_to t("admin.delete"), backoffice_attendant_path(obj), data: { "turbo-method": :delete }, class: "dropdown-item text-danger" %>
+                  <%= link_to t("admin.edit"), edit_backoffice_operator_path(obj), class: "dropdown-item" %>
+                  <%= link_to t("admin.delete"), backoffice_operator_path(obj), data: { "turbo-method": :delete }, class: "dropdown-item text-danger" %>
                 </div>
               </div>
             </td>
@@ -61,7 +61,7 @@
       <% end %>
     </tbody>
   </table>
-  <div class="pag-bar mt-5 pt-5">
+  <div class="pag-bar mt-3 pt-3">
     <%== pagy_bootstrap_nav(@pagy) %>
   </div>
 </div>

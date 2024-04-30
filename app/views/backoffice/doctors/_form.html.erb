@@ -1,22 +1,22 @@
 <%= form_with(model: [:backoffice, @object], remote: true, class: "row g-3 needs-validation") do |f| %>
-  <div class="row g-3 mb-3">
-    <div class="row mb-3">
-      <div class="col-12">
-        <figure class="figure">
-          <% if @object.avatar.attached? %>
-            <%= image_tag @object.avatar.representation(resize_to_limit: [400, 300]).processed, class: "figure-img img-fluid rounded", alt: @object.email %>
-          <% else %>
-            <%= image_tag "no_defined_image.jpg", class: "figure-img img-fluid rounded", alt: @object.email %>
-          <% end %>
-        </figure>
-      </div>
-      <div class="col-3">
-        <div class="input-group mb-3">
-          <%= f.label :avatar, class: "input-group-text" %>
-          <%= f.file_field :avatar, direct_upload: true, class: "form-control" %>
-        </div>
+  <div class="row mb-3">
+    <div class="col-12">
+      <figure class="figure">
+        <% if @object.avatar.attached? %>
+          <%= image_tag @object.avatar.representation(resize_to_limit: [400, 300]).processed, class: "figure-img img-fluid rounded", alt: @object.email %>
+        <% else %>
+          <%= image_tag "no_defined_image.jpg", class: "figure-img img-fluid rounded", alt: @object.email %>
+        <% end %>
+      </figure>
+    </div>
+    <div class="col-3">
+      <div class="input-group mb-3">
+        <%= f.label :avatar, class: "input-group-text" %>
+        <%= f.file_field :avatar, direct_upload: true, class: "form-control" %>
       </div>
     </div>
+  </div>
+  <div class="row g-3 mb-3">
     <div class="col-md-4">
       <%= f.label :name, class: "form-label" %>
       <%= f.text_field :name, class: "form-control" %>
@@ -43,7 +43,7 @@
       <%= f.password_field :password, class: "form-control" %>
     </div>
     <div class="col-md-4">
-      <%= f.label :password, class: "form-label" %>
+      <%= f.label :password_confirmation, class: "form-label" %>
       <%= f.password_field :password_confirmation, class: "form-control" %>
     </div>
   </div>

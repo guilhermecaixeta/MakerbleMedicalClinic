@@ -6,9 +6,12 @@ class DoctorService
     @doctor = Doctor.new(params)
 
     if @doctor.valid?
+      @doctor.role_ids = [Role.find_by(name: "Doctor").id]
+
       @doctor.save!
     end
 
+    @doctor.send_confirmation_instructions
     @doctor
   end
 

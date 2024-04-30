@@ -1,6 +1,6 @@
 <div class="sidebar sidebar-dark sidebar-fixed border-end" id="sidebar">
   <div class="sidebar-header border-bottom">
-    <%= link_to root_path, class: "nav-link" do %>
+    <%= link_to current_user.is_operator? ? backoffice_operators_path : root_path, class: "nav-link" do %>
       <div class="sidebar-brand">
         <svg class="sidebar-brand-full" width="88" height="32" alt="MMC">
           <use xlink:href="<%= asset_path "/app/assets/icons/hospital.svg" %>#fa6-solid--hospital"></use>
@@ -90,9 +90,8 @@
       <% end %>
     <% end %>
     <li class="nav-divider"></li>
-    <% can_read_and_write_attendant = policy_for(current_user, Backoffice::AttendantsController.controller_path).can_read_and_write? %>
-    <% can_read_and_write_doctor = policy_for(current_user, Backoffice::DoctorsController.controller_path).can_read_and_write? %>
-    <% if can_read_and_write_doctor %>
+    <% can_read_and_write = policy_for(current_user, Backoffice::ManagersController.controller_path).can_read_and_write? %>
+    <% if can_read_and_write %>
       <li class="nav-title">
         <%= Doctor.model_name.human %>
       </li>
@@ -112,13 +111,11 @@
           <%= t 'admin.all' %>
         <% end %>
       </li>
-    <% end %>
-    <% if can_read_and_write_attendant %>
       <li class="nav-title">
-        <%= Attendant.model_name.human %>
+        <%= Operator.model_name.human %>
       </li>
       <li class="nav-item">
-        <%= link_to new_backoffice_attendant_path, class: "nav-link" do %>
+        <%= link_to new_backoffice_operator_path, class: "nav-link" do %>
           <svg class="nav-icon">
             <use xlink:href="<%= asset_path "/app/assets/icons/manage.svg" %>#icon-park-solid--people-plus-one"></use>
           </svg>
@@ -126,13 +123,32 @@
         <% end %>
       </li>
       <li class="nav-item">
-        <%= link_to backoffice_attendants_path, class: "nav-link" do %>
+        <%= link_to backoffice_operators_path, class: "nav-link" do %>
           <svg class="nav-icon">
             <use xlink:href="<%= asset_path "/app/assets/icons/manage.svg" %>#fluent--people-settings-20-filled"></use>
           </svg>
           <%= t 'admin.all' %>
         <% end %>
       </li>
+      <li class="nav-title">
+        <%= Manager.model_name.human %>
+      </li>
+      <li class="nav-item">
+        <%= link_to new_backoffice_manager_path, class: "nav-link" do %>
+          <svg class="nav-icon">
+            <use xlink:href="<%= asset_path "/app/assets/icons/manage.svg" %>#icon-park-solid--people-plus-one"></use>
+          </svg>
+          <%= t 'admin.new' %>
+        <% end %>
+      </li>
+      <li class="nav-item">
+        <%= link_to backoffice_managers_path, class: "nav-link" do %>
+          <svg class="nav-icon">
+            <use xlink:href="<%= asset_path "/app/assets/icons/manage.svg" %>#fluent--people-settings-20-filled"></use>
+          </svg>
+          <%= t 'admin.all' %>
+        <% end %>
+      </li>      
     <% end %>
   </ul>
   <div class="sidebar-footer border-top d-none d-md-flex">

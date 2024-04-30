@@ -22,4 +22,8 @@ class Backoffice::AppointmentsController < BackofficeController
   def destroy
     super
   end
+
+  def get_default_path
+    backoffice_appointments_path
+  end
 end

@@ -7,9 +7,8 @@ class Appointment < ApplicationRecord
   validates :end_date_time, comparison: { greater_than: :start_date_time }
 
   scope :get_by_user_in_interval, ->(id, start_date, end_date) {
-          overlapping_interval(start_date, end_date)
-            .where("appointment.doctor_id == :id", { id: id })
-            .get_appointments_for_calendar
+          where("appointments.user_id = :id", { id: id })
+            .overlapping_interval(start_date, end_date)
         }
   scope :overlapping_interval, ->(start_date, end_date) {
       query = <<~EOL
@@ -33,5 +32,13 @@ class Appointment < ApplicationRecord
               end: appointment.end_date_time,
             }
           end
+        }
+
+  scope :statistics_in_interval, ->(start_at, end_at) {
+          date_range = start_at..end_at
+          where(:start_date_time => date_range)
+            .group("current_day")
+            .select("COUNT(id) as total, date_trunc('day', start_date_time::date) as current_day")
+            .order(:current_day)
         }
 end

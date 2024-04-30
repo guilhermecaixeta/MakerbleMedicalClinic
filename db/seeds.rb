@@ -32,17 +32,15 @@ default_roles = [
   { name: "Administrator",
     except_permissions: [] },
   { name: "Doctor",
-   except_permissions: ["#{Backoffice::HomeController.controller_path}:write",
-                        "#{Backoffice::HomeController.controller_path}:read",
-                        "#{Backoffice::AttendantsController.controller_path}:write",
-                        "#{Backoffice::AttendantsController.controller_path}:read",
+   except_permissions: ["#{Backoffice::OperatorsController.controller_path}:write",
+                        "#{Backoffice::OperatorsController.controller_path}:read",
                         "#{Backoffice::PatientsController.controller_path}:write",
                         "#{Backoffice::AppointmentsController.controller_path}:write",
                         "#{Backoffice::ManagersController.controller_path}:write",
                         "#{Backoffice::ManagersController.controller_path}:read"] },
   { name: "Operator",
-   except_permissions: ["#{Backoffice::HomeController.controller_path}:write",
-                        "#{Backoffice::HomeController.controller_path}:read",
+   except_permissions: ["#{Backoffice::HomeController.controller_path}:read",
+                        "#{Backoffice::StatisticsController.controller_path}:read",
                         "#{Backoffice::DoctorsController.controller_path}:read",
                         "#{Backoffice::DoctorsController.controller_path}:write",
                         "#{Backoffice::ManagersController.controller_path}:write",
@@ -61,18 +59,19 @@ end
 puts "Checking permissions"
 default_permissions = ["#{Backoffice::ManagersController.controller_path}:write",
                        "#{Backoffice::ManagersController.controller_path}:read",
-                       "#{Backoffice::HomeController.controller_path}:write",
                        "#{Backoffice::HomeController.controller_path}:read",
+                       "#{Backoffice::StatisticsController.controller_path}:read",
                        "#{Backoffice::DoctorsController.controller_path}:read",
                        "#{Backoffice::DoctorsController.controller_path}:write",
-                       "#{Backoffice::AttendantsController.controller_path}:write",
-                       "#{Backoffice::AttendantsController.controller_path}:read",
+                       "#{Backoffice::OperatorsController.controller_path}:write",
+                       "#{Backoffice::OperatorsController.controller_path}:read",
                        "#{Backoffice::CalendarController.controller_path}:write",
                        "#{Backoffice::CalendarController.controller_path}:read",
                        "#{Backoffice::PatientsController.controller_path}:write",
                        "#{Backoffice::PatientsController.controller_path}:read",
                        "#{Backoffice::AppointmentsController.controller_path}:write",
-                       "#{Backoffice::AppointmentsController.controller_path}:read"]
+                       "#{Backoffice::AppointmentsController.controller_path}:read",
+                       "#{Devise::SessionsController.controller_path}:write"]
 
 existing_permissions = Permission.all
 
@@ -85,7 +84,6 @@ end
 if default_permissions.any?
   puts "There is #{default_permissions.count} permissions to be added"
   puts "Adding permissions"
-  current_datetime = DateTime.now
   upsert_permissions = []
   default_permissions.each do |auth|
     upsert_permissions << { title: auth.titleize, scope: auth, created_at: current_datetime, updated_at: current_datetime }
@@ -112,20 +110,3 @@ roles.each do |role|
   role.save!(validate: false)
 end
 puts "Permissions added to roles"
-
-if Manager.all.empty?
-  puts "Adding admin master"
-  default_password = Rails.configuration.default_password
-  user = Manager.create(
-    name: "Admin master",
-    birthday: "1990-01-01",
-    email: "admin.master@acme.com",
-    password: default_password,
-    password_confirmation: default_password,
-    confirmed_at: current_datetime,
-    role_ids: [Role.select(:id).find_by(name: "Administrator").id],
-  )
-  user.skip_confirmation!
-  user.skip_confirmation_notification!
-  puts "Admin master was added!"
-end

@@ -11,7 +11,7 @@ module ResourceConcern
     end
 
     def get_scope
-      "#{default_class_name}Policy::Scope".constantize.new(default_class, controller_path).resolve()
+      "#{default_class_name}Policy::Scope".constantize.new(current_user, controller_path).resolve()
     end
 
     def get_instance

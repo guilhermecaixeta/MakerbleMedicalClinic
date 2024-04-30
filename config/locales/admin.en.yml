@@ -8,7 +8,9 @@ en:
     edit: Edit
     calendar: Calendar
     statistics:
-      chart_1_title: "Patients added last week"
+      weekly_statistic_patient: "Patients added last week"
+      weekly_statistic_appointment: "Appointments added last week"
+      monthly_statistic: "Monthly statistic"
     action_response:
       view_options: View Options
       created: "%{object_name} created successfully!"
