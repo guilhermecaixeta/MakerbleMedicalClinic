@@ -53,8 +53,9 @@ class Appointment < ApplicationRecord
   end
 
   def appointment_cannot_overlap_existing_one
-    is_overlapping = Appointment.where("end_date_time >= :start_date_time AND start_date_time <= :end_date_time AND (user_id = :user_id OR patient_id = :patient_id)",
-                                       { start_date_time: start_date_time,
+    is_overlapping = Appointment.where("id != :id AND end_date_time >= :start_date_time AND start_date_time <= :end_date_time AND (user_id = :user_id OR patient_id = :patient_id)",
+                                       { id: id,
+                                         start_date_time: start_date_time,
                                          end_date_time: end_date_time,
                                          user_id: user_id,
                                          patient_id: patient_id }).exists?
