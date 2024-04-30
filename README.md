@@ -16,4 +16,71 @@ This application were built using the gems:
 - bootstrap: for css
 - stimulus/turbo: for js
 
-This application use as DB PostgresSQL on the version 12 and mailcatcher in order to validates the emails sent by the application.
+This application uses the standard MVC architecture and use PostgreSQL as the default database. The views are componsed by erb pages and the js controllers for real time updates. 
+
+### How to use
+
+#### Running on .devcontainers
+In order to run this application is required the following setup:
+    
+- vsCode
+- Docker
+- Internet access
+- Support to devcontainers
+
+Open the solution on the root path and the press
+    
+     ctrl + shift + p 
+A floating window will appears then just type "devcontainers: reopen in devcontainers" select the option then press enter.
+
+Now the container will start to be built, it will take a while and please don't forget to type "yes" when asked by ``sorbet``. Otherwise the building process will take forever.
+
+Once all the process finishes there is a small bug on the ```Ruby LSP``` which will not recognize the asdf as the default ruby manager. To fix it just go to the extension settings and look for ``Custom Ruby Command`` then type ``asdf`` on it.
+
+Now the project should be okay to run.
+
+#### Directly on your machine
+
+It's required the tools:
+
+- ruby 3.3.0
+- Postgres
+- Also setup those apps required for the [active storage](https://guides.rubyonrails.org/active_storage_overview.html)
+
+Once the role setup where done you can be able to run the project.
+
+### Running the project
+
+To preload some data and apply the migrations you should run the command: 
+
+    rails dev:setup
+
+``dev:setup`` is a custom task where will create, migrate, seed and pre-populate the DB.
+
+
+This task will create the three default users, they are:
+- Admin Master
+    - email: admin.master@acme.com
+    - pass: 123456
+- Doctor Default
+    - email: doctor.default@acme.com
+    - pass: 123456
+- Operator Default
+    - email: operator.default@acme.com
+    - pass: 123456    
+
+Each one of the users has a different permission level and can perform different tasks, as a example the operator default which can add new patients but the doctor not.
+
+This users were created to easily test the application and check the different level of access between the roles.
+
+
+### Issues
+ 
+ #### Lack of tests
+ Due an issue on the tests they will not be submited now, in the next few days the issue will be addressed and they will be submited.
+
+ #### Performance issue
+ There is a small performance issue due the way the permissions were implemented it's known and is a working in progress.
+
+If you find any other issue please feel free to open an ticket that I could address it properly.
+
