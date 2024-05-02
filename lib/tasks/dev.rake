@@ -114,13 +114,11 @@ namespace :dev do
       start_at = Faker::Date.between(from: creation_date - default_days.days, to: creation_date + default_days.days) + rand(1..24).hours
       end_at = start_at + rand(15..180).minutes
       doctor = doctors.shuffle.sample
-      appointments << { start_date_time: start_at,
-                        end_date_time: end_at,
-                        user_id: doctor.id,
-                        specialty_id: doctor.specialty.id,
-                        patient_id: patients.shuffle.sample.id,
-                        updated_at: creation_date,
-                        created_at: creation_date }
+      Appointment.create({ start_date_time: start_at,
+                           end_date_time: end_at,
+                           doctor: doctor,
+                           specialty: doctor.specialty,
+                           patient: patients.shuffle.sample })
     end
 
     Appointment.upsert_all appointments
