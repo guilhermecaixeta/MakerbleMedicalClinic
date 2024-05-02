@@ -18,3 +18,4 @@ en:
       deleted: "%{object_name} '%{name}' delete successfully!"
     errors:
       missing_date_time: "Missing date time interval"
+      missing_params: "Params cannot be null or empty"

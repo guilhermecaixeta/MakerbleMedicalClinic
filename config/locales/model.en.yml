@@ -22,4 +22,5 @@ en:
   errors:
     messages:
       cant_be_in_past: "can't be in the past"
+      cant_change_past_appointment: "appointment past can't be changed"
       overlapping_appointment: "there is another appointment at the same time"

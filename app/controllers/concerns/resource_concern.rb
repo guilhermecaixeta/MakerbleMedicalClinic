@@ -19,8 +19,7 @@ module ResourceConcern
     end
 
     def get_default_service
-      class_name = default_class_name
-      "#{class_name}Service".constantize
+      "#{default_class_name}Service".constantize.new
     end
 
     def permitted_params

@@ -1,20 +1,14 @@
 # typed: true
 # frozen_string_literal: true
 
-class ManagerService
-  def self.create(params)
-    @manager = Manager.new(params)
+class ManagerService < ApplicationService
+  def create(params)
+    @object = Manager.new(params)
 
-    if @manager.valid?
-      @manager.save!
-    end
-
-    @manager.send_confirmation_instructions
-    @manager
+    apply_changes_if_valid success_callback: lambda { |manager| manager.send_confirmation_instructions }
   end
 
-  def self.update(params, manager)
-    @manager = manager
+  def update(params, object)
     password = params["password"]
     password_confirmation = params["password_confirmation"]
 
@@ -23,12 +17,6 @@ class ManagerService
       params.delete(:password_confirmation)
     end
 
-    @manager.assign_attributes(params)
-
-    if @manager.valid?
-      @manager.save!
-    end
-
-    @manager
+    super params, object
   end
 end
