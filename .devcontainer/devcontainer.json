@@ -29,7 +29,8 @@
       ]
     }
   },
-  "remoteUser": "root", 
+  "remoteUser": "root",
+  "containerUser": "vscode",
   "forwardPorts": [3000, 5432],
   "postCreateCommand": "chmod +x /app/.devcontainer/post-create.sh && /app/.devcontainer/post-create.sh"
 }
