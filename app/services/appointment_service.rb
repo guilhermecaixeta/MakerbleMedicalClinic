@@ -2,9 +2,19 @@
 # frozen_string_literal: true
 
 class AppointmentService < ApplicationService
-  def create(params)
-    @object = Appointment.new(params)
+  def initialize
+    @klass = Appointment
+  end
 
-    return apply_changes_if_valid
+  def create(params)
+    super params
+  end
+
+  def update(params, object)
+    super params, object
+  end
+
+  def destroy(params)
+    super params
   end
 end

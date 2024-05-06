@@ -1,6 +1,7 @@
 class ApplicationController < ActionController::Base
   layout :layout_by_resource
 
+  include RouteConcern
   include Pagy::Backend
 
   protected
@@ -14,12 +15,6 @@ class ApplicationController < ActionController::Base
   end
 
   def after_sign_in_path_for(resource)
-    if resource.is_admin?
-      root_path
-    elsif resource.is_doctor?
-      backoffice_doctors_path
-    elsif resource.is_operator?
-      backoffice_operators_path
-    end
+    get_default_path_for_user current_user, root_path
   end
 end

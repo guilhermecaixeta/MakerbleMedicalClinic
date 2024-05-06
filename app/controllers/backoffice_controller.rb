@@ -2,12 +2,15 @@ class BackofficeController < ApplicationController
   layout "backoffice"
   include RescueConcern
   include ResourceConcern
+  include AuthorizationConcern
   include Pundit::Authorization
 
-  before_action :authenticate_user!
-  before_action :user_can_read?, only: [:index]
-  before_action :user_can_write?, except: [:show, :index]
-  before_action :get_instance, only: [:edit, :update, :destroy]
+  def initialize
+    @bypass_controllers = [Backoffice::DoctorsController.controller_name,
+                           Backoffice::OperatorsController.controller_name]
+    @bypass_actions = ["edit", "update"]
+    super
+  end
 
   def index
     @pagy, @objects = pagy(get_scope())
@@ -18,7 +21,7 @@ class BackofficeController < ApplicationController
   end
 
   def create
-    @valid, @object = get_default_service.create(permitted_params)
+    @valid, @object = get_default_service.create permitted_params
 
     respond_to do |format|
       if @valid
@@ -37,7 +40,7 @@ class BackofficeController < ApplicationController
   end
 
   def update
-    @valid, @object = get_default_service.update(permitted_params, @object)
+    @valid, @object = get_default_service.update permitted_params, @object
     respond_to do |format|
       if @valid
         format.html {
@@ -52,12 +55,12 @@ class BackofficeController < ApplicationController
 
   def destroy
     default_name = @object.has_attribute?(:name) ? @object.name : ""
+    is_destroyed = get_default_service.destroy @object
 
     respond_to do |format|
-      if @object.destroy
+      if is_destroyed
         format.html {
           redirect_back fallback_location: root_path,
-                        status: :see_other,
                         notice: t("admin.action_response.deleted",
                                   object_name: default_class.model_name.human,
                                   name: default_name)

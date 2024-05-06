@@ -44,11 +44,11 @@ export default class extends Controller {
       document.getElementById("end-date-time").value =
         info.event.endStr.slice(0,16);
       document.getElementById("doctor-name").value =
-        info.event.extendedProps.doctor.name;
+        info.event.extendedProps.doctor_name;
       document.getElementById("specialty-name").value =
-        info.event.extendedProps.specialty;
+        info.event.extendedProps.specialty_name;
       document.getElementById("patient-name").value =
-        info.event.extendedProps.patient.name;
+        info.event.extendedProps.patient_name;
       const appointmentModal = coreui.Modal.getOrCreateInstance(
         appointmentModalElement
       );

@@ -6,6 +6,10 @@ class DoctorPolicy < UserPolicy
     [:name, :birthday, :specialty_id, :email, :password, :password_confirmation, :avatar]
   end
 
+  def has_read_and_write_permission?
+    true
+  end
+
   class Scope < ApplicationPolicy::Scope
     def resolve
       Doctor.joins(:specialty)

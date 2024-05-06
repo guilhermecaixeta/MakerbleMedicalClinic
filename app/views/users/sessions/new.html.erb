@@ -10,6 +10,7 @@
             <p class="text-body-secondary">
               <%= t 'devise.sessions.sign_in_to' %>
             </p>
+            <%= render partial: "shared/backoffice/alerts" %>
             <%= form_with(model: resource, url: session_path(resource_name, format: "html"), local: true) do |f| %>
               <div class="input-group mb-3">
                 <span class="input-group-text">
