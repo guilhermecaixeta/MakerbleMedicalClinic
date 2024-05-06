@@ -8,6 +8,8 @@ class User < ApplicationRecord
 
   validates :name, presence: true, length: { minimum: 3, maximum: 255 }
   validates :birthday, presence: true, comparison: { less_than_or_equal_to: Time.now }
+  validates :password, confirmation: true, on: [:create, :update]
+  validates :password_confirmation, presence: true, on: [:create, :update], unless: Proc.new { |it| it.password.blank? }
 
   def is_doctor?
     self.roles.where(name: "Doctor").exists?

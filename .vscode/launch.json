@@ -8,10 +8,35 @@
       "name": "Debug Rails",
       "type": "rdbg",
       "request": "launch",
-      "useTerminal": true,
+      "useTerminal": false,
       "command": "bin/rails",
       "script": "s",
       "args": ["-b", "0.0.0.0"]
+    },
+    {
+      "name": "[Foreman]Debug Rails",
+      "type": "rdbg",
+      "request": "launch",
+      "useTerminal": false,
+      "command": "foreman",
+      "script": "start",
+      "args": ["-f", "Procfile.dev"]
+    },    
+    {
+      "type": "rdbg",
+      "name": "RSpec current line with rdbg",
+      "request": "launch",
+      "useBundler": true,
+      "script": "./bin/rspec",
+      "args": ["${file}:${lineNumber}"]
+    },
+    {
+      "type": "rdbg",
+      "name": "RSpec with rdbg",
+      "request": "launch",
+      "useBundler": true,
+      "script": "./bin/rspec",
+      "args": ["${file}"]
     }
   ]
 }

@@ -11,24 +11,31 @@ class Appointment < ApplicationRecord
           where("appointments.user_id = :id", { id: id })
             .overlapping_interval(start_date, end_date)
         }
+
   scope :overlapping_interval, ->(start_date, end_date) {
       query = <<~EOL
             end_date_time >= :start_date
             AND start_date_time <= :end_date
           EOL
-      includes(:doctor, :patient, :specialty)
-        .where(query,
-               { start_date: start_date, end_date: end_date })
+      where(query,
+            { start_date: start_date, end_date: end_date })
         .get_appointments_for_calendar
     }
   scope :get_appointments_for_calendar, -> {
-          map do |appointment|
+          joins(:doctor, :patient, :specialty)
+            .select("id",
+                    "start_date_time",
+                    "end_date_time",
+                    "users.name as doctor_name",
+                    "patients.name as patient_name",
+                    "specialties.name as specialty_name")
+            .map do |appointment|
             {
               id: appointment.id,
-              title: "#{appointment.doctor.name} - #{appointment.doctor.specialty.name}",
-              extendedProps: { doctor: appointment.doctor,
-                               patient: appointment.patient,
-                               specialty: appointment.doctor.specialty.name },
+              title: "#{appointment.doctor_name} - #{appointment.specialty_name}",
+              extendedProps: { doctor_name: appointment.doctor_name,
+                               patient_name: appointment.patient_name,
+                               specialty_name: appointment.specialty_name },
               start: appointment.start_date_time,
               end: appointment.end_date_time,
             }

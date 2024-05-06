@@ -1,22 +1,22 @@
 # typed: true
 # frozen_string_literal: true
 
-class OperatorService < ApplicationService
-  def create(params)
-    @object = Operator.new(params)
+class OperatorService < UserService
+  def initialize
+    super
+    @role_name = "Operator"
+    @klass = Operator
+  end
 
-    apply_changes_if_valid success_callback: lambda { |operator| operator.send_confirmation_instructions }
+  def create(params)
+    super params
   end
 
   def update(params, object)
-    password = params["password"]
-    password_confirmation = params["password_confirmation"]
-
-    if password.blank? && password_confirmation.blank?
-      params.delete(:password)
-      params.delete(:password_confirmation)
-    end
-
     super params, object
+  end
+
+  def destroy(params)
+    super params
   end
 end

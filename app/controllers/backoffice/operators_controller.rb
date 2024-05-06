@@ -24,6 +24,6 @@ class Backoffice::OperatorsController < BackofficeController
   end
 
   def get_default_path
-    backoffice_operators_path
+    get_default_path_for_user current_user, backoffice_operators_path
   end
 end
