@@ -37,6 +37,22 @@ RSpec.describe Appointment, type: :model do
       subject.end_date_time = Time.now - 1.hour
       expect(subject).to_not be_valid
     end
+
+    it "is invalid when is past start date time" do
+      subject.start_date_time = Time.now - 1.hours
+      expect(subject).to_not be_valid
+    end
+
+    it "is invalid when is past end date time" do
+      subject.end_date_time = Time.now - 1.hours
+      expect(subject).to_not be_valid
+    end
+
+    it "is invalid when there is overlapping time" do
+      doctor = FactoryBot.create :doctor
+      FactoryBot.create(:appointment, :concurrent, doctor: doctor)
+      expect(FactoryBot.build(:appointment, doctor: doctor)).to_not be_valid
+    end
   end
 
   describe "Association" do

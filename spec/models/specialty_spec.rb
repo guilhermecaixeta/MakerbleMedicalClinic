@@ -1,5 +1,21 @@
-require 'rails_helper'
+require "rails_helper"
 
 RSpec.describe Specialty, type: :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+  describe "validation" do
+    subject { FactoryBot.build(:specialty) }
+
+    it "is valid when has all required attributes" do
+      expect(subject).to be_valid
+    end
+
+    it "is not valid when name is missing" do
+      subject.name = nil
+      expect(subject).to_not be_valid
+    end
+
+    it "is not valid when name is too short" do
+      subject.name = "aa"
+      expect(subject).to_not be_valid
+    end
+  end
 end

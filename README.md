@@ -75,12 +75,5 @@ This users were created to easily test the application and check the different l
 
 
 ### Issues
- 
- #### Lack of tests
- Due an issue on the tests they will not be submited now, in the next few days the issue will be addressed and they will be submited.
 
- #### Performance issue
- There is a small performance issue due the way the permissions were implemented it's known and is a working in progress.
-
-If you find any other issue please feel free to open an ticket that I could address it properly.
-
+If there is any issue that need to be addressed, please fill free to open a ticket to discuss it.

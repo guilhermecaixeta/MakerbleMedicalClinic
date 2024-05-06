@@ -39,7 +39,7 @@ class Backoffice::DoctorsController < BackofficeController
   end
 
   def get_default_path
-    backoffice_doctors_path
+    get_default_path_for_user current_user, backoffice_doctors_path
   end
 
   def query_params

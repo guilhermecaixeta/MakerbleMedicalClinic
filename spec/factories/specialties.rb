@@ -1,5 +1,5 @@
 FactoryBot.define do
   factory :specialty do
-    name { "MyString" }
+    name { "Emergency Medicine" }
   end
 end

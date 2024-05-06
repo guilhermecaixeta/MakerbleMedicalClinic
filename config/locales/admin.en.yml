@@ -17,5 +17,7 @@ en:
       updated: "%{object_name} updated successfully!"
       deleted: "%{object_name} '%{name}' delete successfully!"
     errors:
+      missing_klass: "Missing class type"
       missing_date_time: "Missing date time interval"
       missing_params: "Params cannot be null or empty"
+      missing_role_name: "Role name cannot be null or empty"

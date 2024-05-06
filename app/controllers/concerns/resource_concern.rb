@@ -2,13 +2,7 @@ module ResourceConcern
   extend ActiveSupport::Concern
 
   included do
-    def user_can_read?
-      authorize controller_path, :has_read_permission?, policy_class: UserPolicy
-    end
-
-    def user_can_write?
-      authorize controller_path, :has_read_and_write_permission?, policy_class: UserPolicy
-    end
+    before_action :get_instance, only: [:edit, :update, :destroy]
 
     def get_scope
       "#{default_class_name}Policy::Scope".constantize.new(current_user, controller_path).resolve()
@@ -37,6 +31,16 @@ module ResourceConcern
 
     def default_class_name
       controller_name.classify
+    end
+
+    def get_default_path_for_user(user, fallback_route)
+      if user.is_admin?
+        fallback_route
+      elsif user.is_doctor?
+        root_path
+      else
+        backoffice_calendar_index_path
+      end
     end
   end
 end

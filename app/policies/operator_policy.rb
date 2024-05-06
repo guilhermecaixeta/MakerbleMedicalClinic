@@ -6,6 +6,10 @@ class OperatorPolicy < UserPolicy
     [:name, :birthday, :email, :password, :password_confirmation, :avatar]
   end
 
+  def has_read_and_write_permission?
+    true
+  end
+
   class Scope < ApplicationPolicy::Scope
     def resolve
       Operator.select(:id, :name, :email).distinct.order(:name)

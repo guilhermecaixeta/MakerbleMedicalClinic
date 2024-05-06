@@ -60,7 +60,7 @@
           <div class="dropdown-header bg-body-tertiary text-body-secondary fw-semibold my-2">
             <div class="fw-semibold">Settings</div>
           </div>
-          <%= link_to backoffice_user_edit_path, class: "dropdown-item" do %>
+          <%= link_to backoffice_user_edit_path(current_user), class: "dropdown-item" do %>
             <svg class="icon me-2">
               <use xlink:href="<%= asset_path "/app/assets/coreui/icons-2/sprites/free.svg" %>#cil-settings"></use>
             </svg>

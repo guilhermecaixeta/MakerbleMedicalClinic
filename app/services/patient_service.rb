@@ -2,9 +2,19 @@
 # frozen_string_literal: true
 
 class PatientService < ApplicationService
-  def create(params)
-    @object = Patient.new(params)
+  def initialize
+    @klass = Patient
+  end
 
-    apply_changes_if_valid
+  def create(params)
+    super params
+  end
+
+  def update(params, object)
+    super params, object
+  end
+
+  def destroy(params)
+    super params
   end
 end
